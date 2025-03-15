@@ -3,7 +3,7 @@
     build-backend = "hatchling.build"
 
 [project]
-    name = "versec_personal_bests"
+    name = "versecbot_personal_bests"
     version = "0.2"
     authors = [{ name = "Museus", email = "versecbot@museus.dev" }]
     description = "Speedrun Secretary plugin to manage personal bests in a channel"
@@ -21,5 +21,6 @@
         Homepage = "https://github.com/Museus/SupportiveShade"
         Issues = "https://github.com/Museus/SupportiveShade/issues"
 
-    [project.entry-points.'srsec.plugins']
-        a = 'srsec_personal_bests:HandlePersonalBestsPlugin'
+
+    [project.entry-points.'versecbot.plugins']
+        a = 'versecbot_personal_bests:HandlePersonalBestsPlugin'

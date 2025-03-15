@@ -1,4 +1,4 @@
-from speedrun_secretary.settings import PluginSettings, WatcherSettings
+from versecbot.settings import PluginSettings, WatcherSettings
 
 
 class HandlerSettings(WatcherSettings):

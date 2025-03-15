@@ -1,7 +1,7 @@
 from discord import Client, Emoji, Message, TextChannel
 import re
 
-from speedrun_secretary.jobs import Watcher
+from versecbot.jobs import Watcher
 
 from .settings import HandlerSettings
 from .logging import logger

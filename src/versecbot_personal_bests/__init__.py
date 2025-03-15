@@ -1,5 +1,5 @@
 from discord import Intents
-from speedrun_secretary.jobs import Plugin
+from versecbot.jobs import Plugin
 
 from .settings import HandlePersonalBestSettings, HandlerSettings
 from .main import HandlePersonalBest
