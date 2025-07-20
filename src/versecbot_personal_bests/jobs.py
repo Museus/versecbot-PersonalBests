@@ -1,22 +1,23 @@
-from discord import Client, Emoji, Message, TextChannel
+from logging import getLogger
 import re
 
-from versecbot.jobs import Watcher
+from discord import Client, Emoji, Message
+from versecbot_interface import Watcher
 
-from .settings import HandlerSettings
-from .logging import logger
+from .settings import HandlePersonalBestSettings
+
+logger = getLogger("versecbot.plugins.personal_bests.handle_personal_best")
 
 
 class HandlePersonalBest(Watcher):
     enabled: bool
     emoji: Emoji
-    channel: TextChannel
     create_thread: bool
 
     EMOTE_PATTERN = re.compile(r"<:(\S+):\d+>")
 
-    def __init__(self, client: Client, settings: HandlerSettings):
-        super().__init__(settings, logger=logger)
+    def __init__(self, client: Client, settings: HandlePersonalBestSettings):
+        super().__init__(settings)
         logger.debug("Getting emoji with id %s", settings.emoji_id)
         self.emoji = client.get_emoji(int(settings.emoji_id))
         self.create_thread = settings.create_thread

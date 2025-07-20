@@ -1,11 +1,11 @@
-from versecbot.settings import PluginSettings, WatcherSettings
+from versecbot_interface import PluginSettings, WatcherSettings
 
 
-class HandlerSettings(WatcherSettings):
+class HandlePersonalBestSettings(WatcherSettings):
     enabled: bool
     emoji_id: int
     create_thread: bool
 
 
-class HandlePersonalBestSettings(PluginSettings):
-    handlers: list[HandlerSettings]
+class PersonalBestsSettings(PluginSettings):
+    handlers: list[HandlePersonalBestSettings]
