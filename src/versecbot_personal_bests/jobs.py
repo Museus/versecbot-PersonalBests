@@ -1,7 +1,7 @@
 from logging import getLogger
 import re
 
-from discord import Client, Emoji, Message
+from discord import Client, Emoji, Message, TextChannel
 from versecbot_interface import Watcher
 
 from .settings import HandlePersonalBestSettings
@@ -10,17 +10,28 @@ logger = getLogger("versecbot.plugins.personal_bests.handle_personal_best")
 
 
 class HandlePersonalBest(Watcher):
-    enabled: bool
+    client: Client
+    channels: list[TextChannel]
     emoji: Emoji
     create_thread: bool
+    name: str
 
     EMOTE_PATTERN = re.compile(r"<:(\S+):\d+>")
 
     def __init__(self, client: Client, settings: HandlePersonalBestSettings):
         super().__init__(settings)
         logger.debug("Getting emoji with id %s", settings.emoji_id)
-        self.emoji = client.get_emoji(int(settings.emoji_id))
+        self.client = client
         self.create_thread = settings.create_thread
+        self.name = f"watcher_personal_best_{'_'.join(str(channel_id) for channel_id in settings.channel_ids)}"
+
+    def initialize(self, settings: HandlePersonalBestSettings, *args):
+        """Nothing special to do here."""
+        super().initialize(settings, *args)
+        self.emoji = self.client.get_emoji(int(settings.emoji_id))
+        self.channels = [
+            self.client.get_channel(channel_id) for channel_id in settings.channel_ids
+        ]
 
     def should_act(self, message: Message) -> bool:
         if not super().should_act(message):

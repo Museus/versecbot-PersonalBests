@@ -4,7 +4,7 @@
 
 [project]
     name = "versecbot_personal_bests"
-    version = "0.1"
+    version = "0.2.0"
     authors = [{ name = "Museus", email = "versecbot@museus.dev" }]
     description = "VerSecBot plugin to manage personal bests in a channel"
     readme = "README.md"
@@ -17,7 +17,7 @@
     dependencies = [
         "discord-py>=2,<3",
         "pydantic_settings>=2,<3",
-        "versecbot_interface@git+https://github.com/Museus/versecbot-interface.git@v0.2",
+        "versecbot_interface@git+https://github.com/Museus/versecbot-interface.git@v0.3",
     ]
 
     license = "MIT"
@@ -29,7 +29,7 @@
 
 
     [project.entry-points.'versecbot.plugins']
-        a = 'versecbot_personal_bests:PersonalBestsPlugin'
+        personal_bests = 'versecbot_personal_bests:PersonalBestsPlugin'
 
     [project.optional-dependencies]
         qa = ["ruff", "pytest"]

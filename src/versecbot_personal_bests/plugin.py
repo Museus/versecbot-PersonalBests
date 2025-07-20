@@ -30,16 +30,19 @@ class PersonalBestsPlugin(Plugin):
 
             try:
                 pb_handler = HandlePersonalBest(client, handler_settings)
+                pb_handler.initialize(handler_settings, client)
             except Exception:
                 logger.exception(
                     "Failed to initialize Personal Bests handler for channels %s",
-                    ", ".join(handler_settings.channel_ids),
+                    ", ".join(
+                        str(channel_id) for channel_id in handler_settings.channel_ids
+                    ),
                 )
             else:
                 self.assign_job(pb_handler)
                 logger.info(
-                    "Handling personal bests in #%s with Emoji: %s",
-                    pb_handler.channel,
+                    "Handling personal bests in %s with Emoji: %s",
+                    ", ".join(f"#{channel.name}" for channel in pb_handler.channels),
                     pb_handler.emoji,
                 )
 
