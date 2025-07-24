@@ -6,7 +6,9 @@ from versecbot_interface import Watcher
 
 from .settings import HandlePersonalBestSettings
 
-logger = getLogger("versecbot.plugins.personal_bests.handle_personal_best")
+logger = getLogger("discord").getChild(
+    "versecbot.plugins.personal_bests.handle_personal_best"
+)
 
 
 class HandlePersonalBest(Watcher):
@@ -27,6 +29,7 @@ class HandlePersonalBest(Watcher):
 
     def initialize(self, settings: HandlePersonalBestSettings, *args):
         """Nothing special to do here."""
+        logger.debug("Initializing...")
         super().initialize(settings, *args)
         self.emoji = self.client.get_emoji(int(settings.emoji_id))
         self.channels = [

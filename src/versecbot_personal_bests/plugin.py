@@ -7,7 +7,7 @@ from .jobs import HandlePersonalBest
 from .settings import PersonalBestsSettings, HandlePersonalBestSettings
 
 
-logger = getLogger("versecbot.plugins.personal_bests")
+logger = getLogger("discord").getChild("versecbot.plugins.personal_bests")
 
 
 class PersonalBestsPlugin(Plugin):
@@ -27,7 +27,6 @@ class PersonalBestsPlugin(Plugin):
             handler_settings = HandlePersonalBestSettings.model_validate(
                 handler_settings_raw
             )
-
             try:
                 pb_handler = HandlePersonalBest(client, handler_settings)
                 pb_handler.initialize(handler_settings, client)
