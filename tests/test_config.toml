@@ -1,0 +1,14 @@
+[versecbot.plugins.personal_bests]
+    enabled = true
+
+    [[versecbot.plugins.personal_bests.handlers]]
+        enabled = true
+        channel_ids = [1]
+        emoji_id = 1
+        create_thread = true
+
+    [[versecbot.plugins.personal_bests.handlers]]
+        enabled = true
+        channel_ids = [2]
+        emoji_id = 2
+        create_thread = false

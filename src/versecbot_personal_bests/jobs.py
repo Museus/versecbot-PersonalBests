@@ -10,6 +10,20 @@ logger = getLogger("discord").getChild(
     "versecbot.plugins.personal_bests.handle_personal_best"
 )
 
+# Media Types
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+# "application"
+# "audio"
+# "image"
+# "message"
+# "multipart"
+# "text"
+# "video"
+# "font"
+# "example"
+# "model"
+# "haptics"
+
 
 class HandlePersonalBest(Watcher):
     client: Client
@@ -43,10 +57,7 @@ class HandlePersonalBest(Watcher):
         if not message.attachments:
             return False
 
-        return any(
-            "image" in attachment.content_type or "video" in attachment.content_type
-            for attachment in message.attachments
-        )
+        return contains_personal_best(message.attachments)
 
     async def act(self, message: Message):
         logger.info(
@@ -80,3 +91,18 @@ class HandlePersonalBest(Watcher):
                 "[%s] Creating thread with title %s.", message.id, thread_title
             )
             await message.create_thread(name=thread_title)
+
+
+def contains_personal_best(attachments: list[object]) -> bool:
+    return any(
+        contains_image(attachment) or contains_video(attachment)
+        for attachment in attachments
+    )
+
+
+def contains_image(attachment: object) -> bool:
+    return "image" in attachment.content_type
+
+
+def contains_video(attachment: object) -> bool:
+    return "video" in attachment.content_type
